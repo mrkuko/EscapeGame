@@ -8,8 +8,8 @@
     <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
     <style>
         @font-face {
-            font-family: Viking1;
-            src: url({{ url_for('static', filename="data/Viking.ttf") }}) format('truetype');
+            font-family: Viking2;
+            src: url({{ url_for('static', filename="data/Oconnor-6RgM.ttf") }}) format('truetype');
         }
         #background-main {
             /*background: url(../data/portal.png);
@@ -23,8 +23,8 @@
         #content {
             position: absolute;
             margin: 10% 10% 5% 5%;
-            font-family: Viking1;
-            font-size: large;
+            font-family: Viking2;
+            font-size: 36px;
             background-image: url({{ url_for('static', filename="data/old_paper.png") }});
             /* url(../data/old_paper.png); */
             background-size: 100% 100%;
@@ -34,8 +34,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 70%;
+            align-items: center;
+            text-align: justify;
+            height: 75%;
             padding: 40px 60px 0 60px;
+            margin: 0;
         }
         #content #enter{
             position: relative;
@@ -54,7 +57,9 @@
             /* height: 60px; */
             height: 100%;
             width: 240px;
-            font-family: Viking1;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
             /* padding-top: -50px; */
             border-radius: 10px;
             box-shadow: 0px 0px 2px 2px rgb(0,0,0);;
@@ -85,30 +90,31 @@
         //         alert( "Handler for .click() called." );
         //         console.log("ADFSNJU");
         //     });
-        let nextSlideDelay = 800;
+        let NEXT_SLIDE_DELAY = 800;
         $(document).ready(function(){
             console.log("THERE")
-            $("#background-main").fadeIn(nextSlideDelay / 2, stage0);
-        });
-        function stage0(){
             $("#background-main").css("background-size", "100% 100%");
             $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
+            $("#enter button").html("Submit");
+            $("#content").hide();
+            $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
+        });
+        function stage0(){
             // console.log(flask_util.url_for('static', filename="data/capture01.png"))
             // $("#background-main").css("background", flask_util.url_for('static', filename="data/capture01.png"));
             // ddd();
             setTimeout(stage1, 2000)
         }
         function stage1(){
-            $("#content p").html("You are going through your everyday routine of checking"
-                + "the museum's inventory. Nothing is missing and you tick off"
+            $("#content p").html("You are going through your everyday routine of checking "
+                + "the museum's inventory. Nothing is missing and you tick off "
                 + "all items as you do always for the past 8 years."
             );
-            $("#content").fadeIn(nextSlideDelay);
-            $("#enter button").html("Submit");
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on( "click", function() {
-                $("#background-main,#content").fadeOut(nextSlideDelay, function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture02.png") }})");
-                    $("#background-main").fadeIn(nextSlideDelay / 2);
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
                     setTimeout(stage2, 2000)
                 });
             });
@@ -116,40 +122,49 @@
         function stage2(){
             //Krčma moment
             $("#content p").html(
-                "As you step towards Odrorir, which allegedly was used by Dwarves to brew the"
-                + "mead of poetry, bright blue spark bursts towards your hand. You black out"
+                "As you step towards Odrorir, which allegedly was used by Dwarves to brew the "
+                + "mead of poetry, bright blue spark bursts towards your hand. You black out "
                 + "and then suddenly a sweet smell of honey tickles your nose."
             );
-            $("#content").fadeIn(nextSlideDelay);
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on("click", function() {
-                $("#background-main,#content").fadeOut(nextSlideDelay, function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture03.png") }})");
-                    $("#background-main").fadeIn(nextSlideDelay / 2);
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
                     setTimeout(stage3, 2000)
                 });
             });
         }
         function stage3(){
+            console.log("TOHEREDO");
             $("#content p").html(
                 "After abruptly opening your eyes in fear and confusion, you see many short muscular "
                 + "men with long beards standing around you. <br>\"A visitor from Midgard? Aye, we "
                 + "haven't had that for a long time!\"<br>"
-                + "...After answering most of their questions, you ask them how to get back to earth."
-                + "<br>\"Hmm, we are sorry, but that is outside of our powers. But if you sing us some"
-                + "poem to brighten up our dinner, we could let you in Jotunheim through our mineshaft.\""
-                + "<br>You feel the power of Odrorir inside of you and you know that creating a haiku for"
-                + "the dwarves will be a piece of cake."
-            )
-            $("#content").fadeIn(nextSlideDelay);
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on("click", function() {
-                $("#background-main,#content").fadeOut(nextSlideDelay, function(){
-                    $("#background-main").fadeIn(nextSlideDelay / 2, stage4);
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage4);
                 });
             });
         }
         function stage4(){
-            //haiku
-            console.log("haiku");
+            $("#content p").html(
+                "...After answering most of their questions, you ask them how to get back to earth."
+                + "<br>\"Hmm, we are sorry, but that is outside of our powers. But if you sing us some "
+                + "poem to brighten up our dinner, we could let you in Jotunheim through our mineshaft.\""
+                + "<br>You feel the power of Odrorir inside of you and you know that creating a haiku for "
+                + "the dwarves will be a piece of cake."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#enter button").on("click", function() {
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage4);
+                // });
+                console.log("TODO");
+            });
+            console.log("HERERERE");
         }
         // function ddd(){
         //     setTimeout(function(){
