@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
+    <style>
+        @font-face {
+            font-family: Viking1;
+            src: url({{ url_for('static', filename="data/Viking.ttf") }}) format('truetype');
+        }
+        #background-main {
+            /*background: url(../data/portal.png);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;*/
+            background-color: #183343;
+            z-index: -1;
+        }
+        #content {
+            /*margin: 10px;*/
+            /*box-shadow: 0 0 50px 50px white inset;*/
+            font-family: Viking1;
+        }
+        #content p{
+            margin: 0 5px;
+        }
+        #main #img01{
+            margin: 20px auto;
+            margin-bottom: 0;
+            height: 80vh;
+            width: 80vh;
+            z-index: -1;
+            background-image: url({{ url_for('static', filename="data/portal.png") }});
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            border-radius: 160px;
+            box-shadow: 0 0 35px 35px #183343 inset;
+        }
+        #main #enter{
+            width: 100%;
+            height: 50px;
+        }
+        #main button{
+            display: block;
+            background-color: #4EE2EC ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 40px;
+            width: 160px;
+            font-family: Viking1;
+            padding-top: -50px;
+        }
+        #main a{
+            text-decoration: none;
+            font-family: Viking1;
+        }
+        #main h2{
+            text-align: center;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="background-main" class="stretched-max"></div>
+    <div id="content" class="stretched-max">
+        <p>v1.0.0</p>
+        <div id="main" class="stretched-max">
+            <div id="img01"></div>
+            <div id="enter">
+                <a href={{ url_for('lvl01') }}><button>Enter</button></a>
+            </div>
+            <h2>Welcome stranger, make sure you are ready for the long journey</h2>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src={{ url_for('static', filename="scripts/l00.js") }}></script>
+    </div>
+</body>
+</html>

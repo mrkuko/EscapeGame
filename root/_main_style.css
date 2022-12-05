@@ -1,0 +1,19 @@
+.enableBlur {
+    filter: blur(16px);
+}
+.stretched-max{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.blur-box {
+    background-color: #555;
+    box-shadow: 0 0 5px 10px #555;
+}
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}

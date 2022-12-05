@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lvl01</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
+    <style>
+        @font-face {
+            font-family: Viking1;
+            src: url({{ url_for('static', filename="data/Viking.ttf") }}) format('truetype');
+        }
+        #background-main {
+            /*background: url(../data/portal.png);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;*/
+            /* background-color: #183343; */
+            /* background: url(../data/capture01.png); */
+            z-index: -1;
+        }
+        #content {
+            /*margin: 10px;*/
+            /*box-shadow: 0 0 50px 50px white inset;*/
+            margin: 10% 10% 5% 5%;
+            font-family: Viking1;
+            background-image: url({{ url_for('static', filename="data/old_paper.png") }});
+            /* url(../data/old_paper.png); */
+            background-size: 100% 100%;
+        }
+        #content p {
+            padding: 40px 60px;
+        }
+        #content #enter{
+            position: absolute;
+            width: 100%;
+            height: 80px;
+            top: auto;
+            margin: 10px;
+            bottom: 0px;
+        }
+        #content a{
+            text-decoration: none;
+            font-family: Viking1;
+        }
+        #content button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 60px;
+            width: 240px;
+            font-family: Viking1;
+            padding-top: -50px;
+        }
+        #foreground {
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="background-main" class="stretched-max"></div>
+    <div id="content" class="stretched-max">
+        <!--background-color: blue; -->
+        <p>
+            You are going through your everyday routine of checking
+            the museum's inventory. Nothing is missing and you tick off
+            all items as you do always for the past 8 years.
+        </p>
+        <div id="enter">
+            <a href={{ url_for('lvl01') }}><button>Submit</button></a>
+        </div>
+    </div>
+    <div id="foreground" class="stretched-max">
+        <div id="">
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            console.log("THERE")
+            $("#background-main").css("background-size", "100% 100%");
+            $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
+            // console.log(flask_util.url_for('static', filename="data/capture01.png"))
+            // $("#background-main").css("background", flask_util.url_for('static', filename="data/capture01.png"));
+            $("#foreground").
+            ddd();
+        });
+        function ddd(){
+            setTimeout(function(){
+                console.log("HEHE");
+                ddd();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
