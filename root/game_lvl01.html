@@ -26,9 +26,11 @@
             background-repeat: no-repeat;
             background-color: #183343;
             background: url(../data/capture01.png); */
+            display: none;
             z-index: -1;
         }
         #content {
+            display: none;
             position: absolute;
             margin: 10% 10% 5% 5%;
             font-family: Viking2;
@@ -107,6 +109,7 @@
         </div>
     </div>
     <div id="foreground" class="stretched-max"></div>
+    <script src="{{ url_for('static', filename="scripts/core.js") }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         // $("#enter button").click(function() {
@@ -117,20 +120,20 @@
         // $("#background-main").css("background", flask_util.url_for('static', filename="data/capture01.png"));
         // ddd();
         // $("#myButton").prop('onclick', null);
-        let NEXT_SLIDE_DELAY = 1000;
         $(document).ready(function(){
             $("#background-main").css("background-size", "100% 100%");
             $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
             $("#enter button").html("Submit");
             $("#content").hide();
+            $("#background-main").hide();
             $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
             $("#back").click(function(){
                 window.location.href = "{{ url_for('lvl00') }}"; 
             });
         });
         function stage0(){
-            setTimeout(stage1, 2000);
-            // setTimeout(stage5_haiku, 2000);
+            setTimeout(stage1, PICTURE_DELAY);
+            // setTimeout(stage5_haiku, PICTURE_DELAY);
         }
         function stage1(){
             $("#enter button").off('click'); 
@@ -143,7 +146,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture02.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, 2000);
+                    setTimeout(stage2, PICTURE_DELAY);
                 });
             });
         }
@@ -160,14 +163,14 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage1, 2000);
+                    setTimeout(stage1, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture03.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage3, 2000);
+                    setTimeout(stage3, PICTURE_DELAY);
                 });
             });
         }
@@ -183,7 +186,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture02.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, 2000);
+                    setTimeout(stage2, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
@@ -203,9 +206,11 @@
             // $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#content").show();
             $("#enter button").on("click", function() {
-                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage5_haiku);
-                });
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage5_haiku);
+                // });
+                $("#content").hide();
+                stage5_haiku();
             });
         }
         function stage5_haiku(){
@@ -241,6 +246,9 @@
             textarea.css("border-radius", "10px");
             textarea.css("backdrop-filter", "blur(6px)");
             $("#haiku_input:focus").css("outline", "solid 2px black");
+            $("#content p").css("height", "85%");
+            $("#enter").hide();
+            $("#content").show();
             
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
@@ -248,7 +256,7 @@
                     $("#content p").css("height", "75%");
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture03.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage3, 2000);
+                    setTimeout(stage3, PICTURE_DELAY);
                 });
             });
             textarea.on("keypress",function(evt) {
@@ -258,11 +266,7 @@
                 }
                 return true;
             });
-            
-            $("#content p").css("height", "85%");
-            $("#enter").hide();
-
-            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            // $("#content").fadeIn(NEXT_SLIDE_DELAY);
         }
         function handle_result(text){
             $.post("{{ url_for('lvl01_haiku') }}", {"data": text}, function(response){
@@ -287,7 +291,7 @@
         //     setTimeout(function(){
         //         console.log("HEHE");
         //         ddd();
-        //     }, 2000);
+        //     }, PICTURE_DELAY);
         // }
     </script>
 </body>

@@ -20,11 +20,13 @@
             -webkit-transform: rotate(135deg);
         }
         #background-main {
+            display: none;
             background-size: 100% 100%;
             background-color: #183343;
             z-index: -1;
         }
         #content {
+            display: none;
             position: absolute;
             margin: 10% 10% 5% 5%;
             font-family: Viking2;
@@ -98,9 +100,9 @@
         </div>
     </div>
     <div id="foreground" class="stretched-max"></div>
+    <script src="{{ url_for('static', filename="scripts/core.js") }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        let NEXT_SLIDE_DELAY = 1000;
         $(document).ready(function(){
             $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture04.png") }})");
             $("#enter button").html("Submit");
@@ -111,7 +113,7 @@
             });
         });
         function stage0(){
-            setTimeout(stage1, 2000);
+            setTimeout(stage1, PICTURE_DELAY);
         }
         function stage1(){
             $("#enter button").off('click');
@@ -125,7 +127,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture05.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, 2000);
+                    setTimeout(stage2, PICTURE_DELAY);
                 });
             });
         }
@@ -143,7 +145,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture04.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage1, 2000);
+                    setTimeout(stage1, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
@@ -163,7 +165,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage4, 2000);
+                    setTimeout(stage4, PICTURE_DELAY);
                 });
             });
         }
@@ -179,7 +181,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture05.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, 2000);
+                    setTimeout(stage2, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
@@ -190,21 +192,20 @@
         function stage5_quiz(){
             $("button").off('click');
             $("#content p").html(""
-            + "<div id=\"haiku01\">"
+                + "<div id=\"quiz01\">"
                 + "<h2>Task:</h2>"
-                + "<p>Write a haiku for dwarves</p>"
-                + "</div><div id=\"haiku02\">"
-                + "<label for=\"name\">Write answer bellow:</label>"
-                + "<br><textarea name=\"name\" id=\"haiku_input\" placeholder=\"Type correct solution here..\" cols=\"30\" rows=\"5\" style=\""
-                + "box-shadow: "
-                    + "rgba(255, 255, 255, .2) 0 0 12px 12px inset, "
-                    + "rgba(255, 255, 255, .2) 0 6px 6px, "
-                    + "rgba(255, 255, 255, .2) 6px 0 6px 0, "
-                    + "rgba(255, 255, 255, .2) 0 0 6px 6px;"
-                + "padding: 10px; outline: none; resize: none; font-size: 20px;"
-                + "\"></textarea>"
+                + "<p>Select correct answer for equation:</p>"
+                + "</div><div id=\"quiz02\">"
+                + "<img src=\"url({{ url_for('static', filename="data/question.png") }}\" alt=\"\">"
                 + "</div>"
             );
+            $("#content p p").css("padding", 0);
+            $("#content p").css("justify-content", "space-between");
+            $("#content p p").css("height", "auto");
+            $("#quiz01 h2").css("margin", "0");
+            $("#quiz01").css("align-items", "start");
+            $("#quiz01").css("align-self", "start");
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
         }
     </script>
 </body>

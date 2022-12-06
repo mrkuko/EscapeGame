@@ -1,0 +1,2 @@
+const NEXT_SLIDE_DELAY = 1500;
+const PICTURE_DELAY = 3000; 

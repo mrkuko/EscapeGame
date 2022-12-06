@@ -84,12 +84,22 @@
         <div id="main" class="stretched-max">
             <div id="balast"></div>
             <div id="enter">
-                <a href={{ url_for('lvl01') }}><button>Enter</button></a>
+                <a><button>Enter</button></a>
             </div>
             <h2>Welcome stranger, make sure you are ready for the long journey</h2>
         </div>
+        <script src="{{ url_for('static', filename="scripts/core.js") }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src={{ url_for('static', filename="scripts/l00.js") }}></script>
+        <script>
+            $(document).ready(function(){
+                $("#enter button").click(function(){
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        window.location.href = "{{ url_for('lvl01') }}"; 
+                    });
+                });
+            });
+        </script>
     </div>
 </body>
 </html>
