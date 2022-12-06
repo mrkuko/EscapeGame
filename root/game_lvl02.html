@@ -8,23 +8,82 @@
     <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
     <style>
         @font-face {
-            font-family: Viking1;
-            src: url({{ url_for('static', filename="data/Viking.ttf") }}) format('truetype');
+            font-family: Viking2;
+            src: url({{ url_for('static', filename="data/Oconnor-6RgM.ttf") }}) format('truetype');
+        }
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 4px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
         }
         #background-main {
-            /*background: url(../data/portal.png);
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;*/
+            background-size: 100% 100%;
             background-color: #183343;
             z-index: -1;
         }
         #content {
-            /*margin: 10px;*/
-            /*box-shadow: 0 0 50px 50px white inset;*/
-            font-family: Viking1;
+            position: absolute;
+            margin: 10% 10% 5% 5%;
+            font-family: Viking2;
+            font-size: 32px;
+            background-image: url({{ url_for('static', filename="data/old_paper.png") }});
+            background-size: 100% 100%;
+        }
+        #content p {
+            position: static;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: justify;
+            height: 75%;
+            padding: 40px 60px 0 60px;
+            margin: 0;
+        }
+        #content #enter{
+            position: relative;
+            width: 100%;
+            height: 10%;
+            margin: 10px;
+            bottom: 0px;
+        }
+        #enter button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 100%;
+            width: 240px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);;
+        }
+        #enter button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #content #back{
+            position: fixed;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #content #back:hover{
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: 0.7s;
         }
         #foreground {
+            display: none;
             z-index: 1;
         }
     </style>
@@ -32,9 +91,120 @@
 <body>
     <div id="background-main" class="stretched-max"></div>
     <div id="content" class="stretched-max">
-        PATTERN
+        <button id="back"><i class="arrow"></i></button>
+        <p></p>
+        <div id="enter">
+            <button></button>
+        </div>
     </div>
-    <div id="foreground" class="stretched-max">
-        PATTERN
-    </div>
+    <div id="foreground" class="stretched-max"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        let NEXT_SLIDE_DELAY = 1000;
+        $(document).ready(function(){
+            $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture04.png") }})");
+            $("#enter button").html("Submit");
+            $("#background-main,#content").hide();
+            $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
+            $("#back").click(function(){
+                window.location.href = "{{ url_for('lvl01') }}"; 
+            });
+        });
+        function stage0(){
+            setTimeout(stage1, 2000);
+        }
+        function stage1(){
+            $("#enter button").off('click');
+            $("#content p").html(
+                "Exiting the cave a bright light makes you squint. "
+                + "A far-fetching rocky plain encircled by mountains, "
+                + "each seemingly as tall as mt. Everest."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture05.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage2, 2000);
+                });
+            });
+        }
+        function stage2(){
+            $("button").off('click');
+            $("#content p").html(
+                "You make your way to a village. As you come closer, "
+                + "the houses get bigger and bigger and you feel very small. "
+                + "From one of the houses runs out a grey-skinned human "
+                + "and he runs to you. He is slightly taller than you. "
+                + "Suddenly he yells and grabs you."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture04.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage1, 2000);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#content").hide();
+                stage3();
+            });
+        }
+        function stage3(){
+            $("#enter button").off('click');
+            $("#content p").html(
+                "\"Quick! Run with me, "
+                + "you need to hide. The adult Jotuns will be returning "
+                + "from the hunt soon and if they see you, they will eat you!\""
+            );
+            $("#content").show();
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage4, 2000);
+                });
+            });
+        }
+        function stage4(){
+            $("button").off('click');
+            $("#content p").html(
+                "\"This world is not safe for you, I will send you to Álfheim using my father's runestone. "
+                + "But first, to save yourself, you will have to help me with my math homework.\" "
+                + "He smirks at you and hands you a stone table with strange symbols."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture05.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage2, 2000);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#content").hide();
+                stage5_quiz();
+            });
+        }
+        function stage5_quiz(){
+            $("button").off('click');
+            $("#content p").html(""
+            + "<div id=\"haiku01\">"
+                + "<h2>Task:</h2>"
+                + "<p>Write a haiku for dwarves</p>"
+                + "</div><div id=\"haiku02\">"
+                + "<label for=\"name\">Write answer bellow:</label>"
+                + "<br><textarea name=\"name\" id=\"haiku_input\" placeholder=\"Type correct solution here..\" cols=\"30\" rows=\"5\" style=\""
+                + "box-shadow: "
+                    + "rgba(255, 255, 255, .2) 0 0 12px 12px inset, "
+                    + "rgba(255, 255, 255, .2) 0 6px 6px, "
+                    + "rgba(255, 255, 255, .2) 6px 0 6px 0, "
+                    + "rgba(255, 255, 255, .2) 0 0 6px 6px;"
+                + "padding: 10px; outline: none; resize: none; font-size: 20px;"
+                + "\"></textarea>"
+                + "</div>"
+            );
+        }
+    </script>
 </body>

@@ -1,7 +1,9 @@
 import os
+import json
+import scripts.haiku as haiku
 
 import flask
-from flask import Flask
+from flask import Flask, request
 
 print(os.getcwd())
 app = Flask(__name__, template_folder="root", static_folder=os.getcwd())
@@ -27,6 +29,15 @@ def lvl01():
 @app.route("/game_lvl02")
 def lvl02():
     return flask.render_template("game_lvl02.html")
+
+
+@app.route("/game_lvl01/haiku", methods=['POST'])
+def lvl01_haiku():
+    print(request.form["data"])
+    is_correct, msg = haiku.is_haiku(request.form["data"])
+    print(is_correct, msg)
+    return json.dumps({'success': True, "correct": is_correct, "msg": msg}),\
+        200, {'ContentType': 'application/json'}
 
 
 if __name__ == "__main__":

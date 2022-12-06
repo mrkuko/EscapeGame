@@ -11,6 +11,14 @@
             font-family: Viking2;
             src: url({{ url_for('static', filename="data/Oconnor-6RgM.ttf") }}) format('truetype');
         }
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 4px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
         #background-main {
             /*background: url(../data/portal.png);
             background-position: center;
@@ -24,7 +32,7 @@
             position: absolute;
             margin: 10% 10% 5% 5%;
             font-family: Viking2;
-            font-size: 36px;
+            font-size: 32px;
             background-image: url({{ url_for('static', filename="data/old_paper.png") }});
             /* url(../data/old_paper.png); */
             background-size: 100% 100%;
@@ -49,7 +57,7 @@
             margin: 10px;
             bottom: 0px;
         }
-        #content button{
+        #content #submit{
             display: block;
             background-color: rgba(30, 30, 30, 0.6) ;
             border: solid rgba(30, 30, 30, 70);
@@ -64,8 +72,23 @@
             border-radius: 10px;
             box-shadow: 0px 0px 2px 2px rgb(0,0,0);;
         }
-        #content button:hover {
+        #content #submit:hover {
             background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #content #back{
+            position: fixed;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #content #back:hover{
+            background-color: rgba(255, 255, 255, 0.8);
             transition: 0.7s;
         }
         #foreground {
@@ -77,10 +100,10 @@
 <body>
     <div id="background-main" class="stretched-max"></div>
     <div id="content" class="stretched-max">
-        <!--background-color: blue; -->
+        <button id="back"><i class="arrow"></i></button>
         <p></p>
         <div id="enter">
-            <button></button>
+            <button id="submit"></button>
         </div>
     </div>
     <div id="foreground" class="stretched-max"></div>
@@ -90,66 +113,86 @@
         //         alert( "Handler for .click() called." );
         //         console.log("ADFSNJU");
         //     });
-        let NEXT_SLIDE_DELAY = 800;
+        // console.log(flask_util.url_for('static', filename="data/capture01.png"))
+        // $("#background-main").css("background", flask_util.url_for('static', filename="data/capture01.png"));
+        // ddd();
+        // $("#myButton").prop('onclick', null);
+        let NEXT_SLIDE_DELAY = 1000;
         $(document).ready(function(){
-            console.log("THERE")
             $("#background-main").css("background-size", "100% 100%");
             $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
             $("#enter button").html("Submit");
             $("#content").hide();
             $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
+            $("#back").click(function(){
+                window.location.href = "{{ url_for('lvl00') }}"; 
+            });
         });
         function stage0(){
-            // console.log(flask_util.url_for('static', filename="data/capture01.png"))
-            // $("#background-main").css("background", flask_util.url_for('static', filename="data/capture01.png"));
-            // ddd();
-            setTimeout(stage1, 2000)
+            setTimeout(stage1, 2000);
+            // setTimeout(stage5_haiku, 2000);
         }
         function stage1(){
+            $("#enter button").off('click'); 
             $("#content p").html("You are going through your everyday routine of checking "
                 + "the museum's inventory. Nothing is missing and you tick off "
                 + "all items as you do always for the past 8 years."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
-            $("#enter button").on( "click", function() {
+            $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture02.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, 2000)
+                    setTimeout(stage2, 2000);
                 });
             });
         }
         function stage2(){
             //Krčma moment
+            $("button").off('click');
             $("#content p").html(
                 "As you step towards Odrorir, which allegedly was used by Dwarves to brew the "
                 + "mead of poetry, bright blue spark bursts towards your hand. You black out "
                 + "and then suddenly a sweet smell of honey tickles your nose."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture01.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage1, 2000);
+                });
+            });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture03.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage3, 2000)
+                    setTimeout(stage3, 2000);
                 });
             });
         }
         function stage3(){
-            console.log("TOHEREDO");
+            $("button").off('click');
             $("#content p").html(
                 "After abruptly opening your eyes in fear and confusion, you see many short muscular "
                 + "men with long beards standing around you. <br>\"A visitor from Midgard? Aye, we "
                 + "haven't had that for a long time!\"<br>"
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
-            $("#enter button").on("click", function() {
+            $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage4);
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture02.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage2, 2000);
                 });
+            });
+            $("#enter button").on("click", function() {
+                $("#content").hide();
+                stage4();
             });
         }
         function stage4(){
+            $("#enter button").off('click'); 
             $("#content p").html(
                 "...After answering most of their questions, you ask them how to get back to earth."
                 + "<br>\"Hmm, we are sorry, but that is outside of our powers. But if you sing us some "
@@ -157,14 +200,88 @@
                 + "<br>You feel the power of Odrorir inside of you and you know that creating a haiku for "
                 + "the dwarves will be a piece of cake."
             );
-            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            // $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#content").show();
             $("#enter button").on("click", function() {
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage4);
-                // });
-                console.log("TODO");
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage5_haiku);
+                });
             });
-            console.log("HERERERE");
+        }
+        function stage5_haiku(){
+            $("button").off('click'); 
+            $("#content p").html(""
+                + "<div id=\"haiku01\">"
+                + "<h2>Task:</h2>"
+                + "<p>Write a haiku for dwarves</p>"
+                + "</div><div id=\"haiku02\">"
+                + "<label for=\"name\">Write answer bellow:</label>"
+                + "<br><textarea name=\"name\" id=\"haiku_input\" placeholder=\"Type correct solution here..\" cols=\"30\" rows=\"5\" style=\""
+                + "box-shadow: "
+                    + "rgba(255, 255, 255, .2) 0 0 12px 12px inset, "
+                    + "rgba(255, 255, 255, .2) 0 6px 6px, "
+                    + "rgba(255, 255, 255, .2) 6px 0 6px 0, "
+                    + "rgba(255, 255, 255, .2) 0 0 6px 6px;"
+                + "padding: 10px; outline: none; resize: none; font-size: 20px;"
+                + "\"></textarea>"
+                + "</div>"
+            );
+            $("#content p p").css("padding", 0);
+            $("#content p").css("justify-content", "space-between");
+            $("#content p p").css("height", "auto");
+            $("#haiku01 h2").css("margin", "0");
+            $("#haiku01").css("align-items", "start");
+            $("#haiku01").css("align-self", "start");
+            $("#haiku02").css("width", "80%");
+            textarea = $("#haiku_input");
+            textarea.css("width", "100%");
+            textarea.css("height", "150px");
+            textarea.css("background", "none");
+            textarea.css("border", "none");
+            textarea.css("border-radius", "10px");
+            textarea.css("backdrop-filter", "blur(6px)");
+            $("#haiku_input:focus").css("outline", "solid 2px black");
+            
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#enter").show();
+                    $("#content p").css("height", "75%");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture03.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3, 2000);
+                });
+            });
+            textarea.on("keypress",function(evt) {
+                if (evt.keyCode == 13 && !evt.shiftKey){
+                    handle_result(textarea.val())
+                    return false;
+                }
+                return true;
+            });
+            
+            $("#content p").css("height", "85%");
+            $("#enter").hide();
+
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+        }
+        function handle_result(text){
+            $.post("{{ url_for('lvl01_haiku') }}", {"data": text}, function(response){
+                resultData = JSON.parse(response)
+                if (resultData.hasOwnProperty("correct") && resultData.correct){
+                    if (confirm("Congratulations, correct answer!")){
+                        $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                            window.location.href = "{{ url_for('lvl02') }}"; 
+                        });
+                    }
+                }else{
+                    let explanation = "";
+                    if (resultData.hasOwnProperty("msg")){
+                        explanation = resultData.msg;
+                    }
+                    alert("Wrong answer!\n" + explanation);
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, stage5_haiku);
+                }
+            });
         }
         // function ddd(){
         //     setTimeout(function(){

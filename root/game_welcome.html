@@ -12,11 +12,14 @@
             src: url({{ url_for('static', filename="data/Viking.ttf") }}) format('truetype');
         }
         #background-main {
-            /*background: url(../data/portal.png);
+            /*background: url(../data/portal.png); */
             background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;*/
-            background-color: #183343;
+            /* background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #183343; */
+            background: url({{ url_for('static', filename="data/capture00.png") }});
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
             z-index: -1;
         }
         #content {
@@ -27,18 +30,10 @@
         #content p{
             margin: 0 5px;
         }
-        #main #img01{
-            margin: 20px auto;
-            margin-bottom: 0;
-            height: 80vh;
-            width: 80vh;
-            z-index: -1;
-            background-image: url({{ url_for('static', filename="data/portal.png") }});
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            border-radius: 160px;
-            box-shadow: 0 0 35px 35px #183343 inset;
+        #main {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         #main #enter{
             width: 100%;
@@ -46,17 +41,30 @@
         }
         #main button{
             display: block;
-            background-color: #4EE2EC ;
-            border: solid rgba(30, 30, 30, 70);
+            background-color: #4a7b93;
             margin: 0 auto;
-            height: 40px;
-            width: 160px;
+            height: 90px;
+            width: 90px;
             font-family: Viking1;
             padding-top: -50px;
-            border-radius: 10px;
+            border: none;
+            border-radius: 50%;
+            /* box-shadow: 
+            rgba(74, 123, 147, .2) 0 -25px 18px -14px inset,
+            rgba(74, 123, 147, .15) 0 1px 2px,
+            rgba(74, 123, 147, .15) 0 2px 4px,
+            rgba(74, 123, 147, .15) 0 4px 8px,
+            rgba(74, 123, 147, .15) 0 8px 16px,
+            rgba(74, 123, 147, .15) 0 16px 32px; */
+            box-shadow: 
+            rgba(35, 76, 110, 1) 0 0 12px 12px inset,
+            rgba(35, 76, 110, 1) 0 6px 6px,
+            rgba(35, 76, 110, 1) 6px 0 6px 0,
+            rgba(35, 76, 110, 1) 0 0 6px 6px;
+            border: solid rgb(35, 76, 110);
         }
         #main button:hover {
-            background-color: #227eb0;
+            background-color: #234c6e;
             transition: 0.7s;
         }
         #main a{
@@ -74,7 +82,7 @@
     <div id="content" class="stretched-max">
         <p>v1.0.0</p>
         <div id="main" class="stretched-max">
-            <div id="img01"></div>
+            <div id="balast"></div>
             <div id="enter">
                 <a href={{ url_for('lvl01') }}><button>Enter</button></a>
             </div>
