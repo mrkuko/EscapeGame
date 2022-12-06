@@ -203,12 +203,8 @@
                 + "<br>You feel the power of Odrorir inside of you and you know that creating a haiku for "
                 + "the dwarves will be a piece of cake."
             );
-            // $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#content").show();
             $("#enter button").on("click", function() {
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage5_haiku);
-                // });
                 $("#content").hide();
                 stage5_haiku();
             });
@@ -283,7 +279,8 @@
                         explanation = resultData.msg;
                     }
                     alert("Wrong answer!\n" + explanation);
-                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, stage5_haiku);
+                    $("#content").hide();
+                    stage5_haiku();
                 }
             });
         }

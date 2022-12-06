@@ -34,7 +34,7 @@
             background-image: url({{ url_for('static', filename="data/old_paper.png") }});
             background-size: 100% 100%;
         }
-        #content p {
+        #content #p_main {
             position: static;
             display: flex;
             flex-direction: column;
@@ -63,7 +63,7 @@
             font-size: x-large;
             font-weight: bold;
             border-radius: 10px;
-            box-shadow: 0px 0px 2px 2px rgb(0,0,0);;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
         }
         #enter button:hover {
             background-color: rgba(30, 30, 30, 0.9);
@@ -94,7 +94,42 @@
     <div id="background-main" class="stretched-max"></div>
     <div id="content" class="stretched-max">
         <button id="back"><i class="arrow"></i></button>
-        <p></p>
+        <p id="p_main">
+            <div id="quiz01" style="display: none;">
+                <h2>Task:</h2>
+                <p>Select correct answer for equation:</p>
+            </div>
+            <div id="quiz02" style="display: none;">
+                <div id="quiz02_1">
+                    <img src="url({{ url_for('static', filename="data/question.png") }}" alt="">
+                </div>
+                <div id="quiz02_2">
+                    <div id="quiz02_2_1">
+                        <h2>Your favorite thing in the world:</h2>
+                        <ul>
+                        <li>
+                            <input type="radio" id="f-option" name="selector">
+                            <label for="f-option">Pizza</label>
+                            <div class="check"></div>
+                        </li>
+                        <li>
+                            <input type="radio" id="s-option" name="selector">
+                            <label for="s-option">Bacon</label>
+                            <div class="check"><div class="inside"></div></div>
+                        </li>
+                        <li>
+                            <input type="radio" id="t-option" name="selector">
+                            <label for="t-option">Cats</label>
+                            <div class="check"><div class="inside"></div></div>
+                        </li>
+                        </ul>
+                    </div>
+                    <div id="quiz02_2_2">
+                        <button></button>
+                    </div>
+                </div>
+            </div>
+        </p>
         <div id="enter">
             <button></button>
         </div>
@@ -117,7 +152,7 @@
         }
         function stage1(){
             $("#enter button").off('click');
-            $("#content p").html(
+            $("#p_main").html(
                 "Exiting the cave a bright light makes you squint. "
                 + "A far-fetching rocky plain encircled by mountains, "
                 + "each seemingly as tall as mt. Everest."
@@ -133,7 +168,7 @@
         }
         function stage2(){
             $("button").off('click');
-            $("#content p").html(
+            $("#p_main").html(
                 "You make your way to a village. As you come closer, "
                 + "the houses get bigger and bigger and you feel very small. "
                 + "From one of the houses runs out a grey-skinned human "
@@ -155,7 +190,7 @@
         }
         function stage3(){
             $("#enter button").off('click');
-            $("#content p").html(
+            $("#p_main").html(
                 "\"Quick! Run with me, "
                 + "you need to hide. The adult Jotuns will be returning "
                 + "from the hunt soon and if they see you, they will eat you!\""
@@ -171,7 +206,7 @@
         }
         function stage4(){
             $("button").off('click');
-            $("#content p").html(
+            $("#p_main").html(
                 "\"This world is not safe for you, I will send you to Álfheim using my father's runestone. "
                 + "But first, to save yourself, you will have to help me with my math homework.\" "
                 + "He smirks at you and hands you a stone table with strange symbols."
@@ -191,21 +226,35 @@
         }
         function stage5_quiz(){
             $("button").off('click');
-            $("#content p").html(""
-                + "<div id=\"quiz01\">"
-                + "<h2>Task:</h2>"
-                + "<p>Select correct answer for equation:</p>"
-                + "</div><div id=\"quiz02\">"
-                + "<img src=\"url({{ url_for('static', filename="data/question.png") }}\" alt=\"\">"
-                + "</div>"
-            );
-            $("#content p p").css("padding", 0);
-            $("#content p").css("justify-content", "space-between");
-            $("#content p p").css("height", "auto");
-            $("#quiz01 h2").css("margin", "0");
-            $("#quiz01").css("align-items", "start");
-            $("#quiz01").css("align-self", "start");
-            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            // $("#content p").html(""
+            //     + "<div id=\"quiz01\">"
+            //     + "<h2>Task:</h2>"
+            //     + "<p>Select correct answer for equation:</p>"
+            //     + "</div><div id=\"quiz02\">"
+            //     + "<div id=\"quiz02_1\">"
+            //     + "<img src=\"url({{ url_for('static', filename="data/question.png") }}\" alt=\"\">"
+            //     + "</div><div id=\"quiz02_2\">"
+            //     + "</div></div>"
+            // );
+            // $("#content p p").css("padding", 0);
+            // $("#content p").css("justify-content", "space-between");
+            // $("#content p p").css("height", "auto");
+            // $("#quiz01 h2").css("margin", "0");
+            // $("#quiz01").css("align-items", "start");
+            // $("#quiz01").css("align-self", "start");
+            $("#content").show();
+            $("#quiz01").show();
+            $("#quiz02").show();
+
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#enter").show();
+                    $("#p_main").css("height", "75%");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage4, PICTURE_DELAY);
+                });
+            });
         }
     </script>
 </body>
