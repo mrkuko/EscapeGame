@@ -426,8 +426,6 @@
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#p_main").css("text-align", "justify");
-                    $("#content").css("margin", "10% 10% 5% 5%");
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
                     setTimeout(stage5, PICTURE_DELAY);
