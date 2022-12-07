@@ -140,9 +140,9 @@
         function stage1(){
             $("#enter button").off('click');
             $("#p_main").html(
-                "Exiting the cave a bright light makes you squint. "
-                + "A far-fetching rocky plain encircled by mountains, "
-                + "each seemingly as tall as mt. Everest."
+                "Exiting the cave a bright light makes you squint. "+
+                "In front of you stretches a wast rocky plain encircled"+
+                " by mountains, each seemingly as tall as mt. Everest."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on("click", function() {
@@ -156,10 +156,10 @@
         function stage2(){
             $("button").off('click');
             $("#p_main").html(
-                "You make your way to a village. As you come closer, "
+                "You make your way to a village you saw from afar. As you come closer, "
                 + "the houses get bigger and bigger and you feel very small. "
                 + "From one of the houses runs out a grey-skinned human "
-                + "and he runs to you. He is slightly taller than you. "
+                + "and he approaches you. He is slightly taller than you. "
                 + "Suddenly he yells and grabs you."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
@@ -196,7 +196,7 @@
             $("#p_main").html(
                 "\"This world is not safe for you, I will send you to Álfheim using my father's runestone. "
                 + "But first, to save yourself, you will have to help me with my math homework.\" "
-                + "He smirks at you and hands you a stone table with strange symbols."
+                + "He smirks at you and hands you a stone tablet with strange symbols."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
