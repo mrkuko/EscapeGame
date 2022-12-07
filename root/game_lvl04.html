@@ -426,9 +426,11 @@
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
+                    $("#content").css("margin", "10% 10% 5% 5%");
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage5, PICTURE_DELAY);
+                    stage5();
                 });
             });
             $("#enter button").on("click", function() {
@@ -530,11 +532,10 @@
 
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#enter").show();
-                    $("#p_main").css("height", "75%");
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
+                    clearMess();
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture16_THOR.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage4, PICTURE_DELAY);
+                    setTimeout(stage7, PICTURE_DELAY);
                 });
             });
             $("#info").click(function(){
@@ -585,6 +586,14 @@
                 "The brother of Byleist is in company with them."
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    stage8();
+                });
+            });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#p_main").css("text-align", "justify");
@@ -683,11 +692,10 @@
 
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#enter").show();
-                    $("#p_main").css("height", "75%");
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
+                    clearMess();
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture17_LOKI.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage4, PICTURE_DELAY);
+                    setTimeout(stage9, PICTURE_DELAY);
                 });
             });
             $("#info").click(function(){
@@ -731,7 +739,6 @@
             $("button").off('click');
             $("#p_main").html(
                 "-From old Norse scripts:<br>&nbsp;<br>" +
-                "-From old Norse scripts:<br>" +
                 "Then is fulfilled Hlín's<br>" +
                 "second sorrow,<br>" +
                 "when Óðinn goes<br>" +
@@ -743,17 +750,18 @@
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                //     setTimeout(stage2, PICTURE_DELAY);
-                // });
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    stage10();
+                });
             });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage12, PICTURE_DELAY);
+                    stage12();
                 });
             });
         }
@@ -764,11 +772,12 @@
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                //     setTimeout(stage2, PICTURE_DELAY);
-                // });
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        clearMess();
+                        $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture18_ODIN.png") }})");
+                        $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                        setTimeout(stage11, PICTURE_DELAY);
+                    });
             });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
@@ -788,11 +797,12 @@
             $("#enter button").html("Let's go one more time!")
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                //     setTimeout(stage2, PICTURE_DELAY);
-                // });
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#enter button").html("Submit")
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    stage12();
+                });
             });
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
