@@ -87,8 +87,8 @@
             background-color: rgba(30, 30, 30, 0.6) ;
             border: solid rgba(30, 30, 30, 70);
             margin: 0 auto;
-            height: 40px;
-            width: 120px;
+            height: 60px;
+            width: 180px;
             font-family: Viking2;
             font-size: x-large;
             font-weight: bold;
@@ -99,7 +99,7 @@
             background-color: rgba(30, 30, 30, 0.9);
             transition: 0.7s;
         }
-        #content #back{
+        #back{
             top: 20px;
             left: 20px;
         }
@@ -228,19 +228,19 @@
                             "<ul>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"a-option\" name=\"selector\" value=\"1\">" +
-                                "<label for=\"a-option\">Pizza</label>" +
+                                "<label for=\"a-option\"><img src=\"{{ url_for('static', filename="data/question01_2.png") }}\" alt=\"\"></label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
-                                "<label for=\"b-option\">Bacon</label>" +
+                                "<label for=\"b-option\"><img src=\"{{ url_for('static', filename="data/question01_3.png") }}\" alt=\"\"></label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
-                                "<label for=\"c-option\">Cats</label>" +
+                                "<label for=\"c-option\"><img src=\"{{ url_for('static', filename="data/question01_4.png") }}\" alt=\"\"></label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
-                                "<label for=\"d-option\">Ananas</label>" +
+                                "<label for=\"d-option\"><img src=\"{{ url_for('static', filename="data/question01_5.png") }}\" alt=\"\"></label>" +
                             "</li>" +
                             "</ul>" +
                         "</div>" +
@@ -270,10 +270,14 @@
             $("#quiz02_1 img").css("height", "100px");
 
             $("#quiz01 h2").css("margin", "0");
+            $("#quiz02").css("width", "100%");
             $("#quiz02_2").css("display", "flex");
             $("#quiz02_2").css("flex=direction", "row");
+            $("#quiz02_2").css("justify-content", "space-between");
+            $("#quiz02_2").css("width", "100%");
             $("#quiz02_2_1").css("flex=direction", "column");
             $("#quiz02_2_1").css("align-items", "flex-end");
+            $("#quiz02_2_1 img").css("height", "42px");
             $("#quiz02_2_2").css("display", "flex");
             $("#quiz02_2_2").css("flex=direction", "column");
             $("#quiz02_2_2").css("align-items", "flex-end");
@@ -299,14 +303,26 @@
                 });
             });
             $("#info").click(function(){
+                $("#enter").hide();
                 $("#foreground").css("display", "flex");
                 $("#foreground").css("align-items", "center");
                 $("#foreground").css("justify-content", "center");
                 $("#foreground").html("" +
-                    "<img src=\"{{ url_for('static', filename="data/question01.png") }}\" alt=\"\">"
+                    "<img src=\"{{ url_for('static', filename="data/question01_1.png") }}\" alt=\"\">" +
+                    "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
                 );
-                // alert("TEST");
+                $("#foreground img").css("height", "80%");
+                $("#foreground img").css("width", "80%");
+                $("#foreground img").css("padding", "10%");
+                $("#foreground img").css("background-color", "rgba(255, 255, 255, .1)");
+                $("#foreground img").css("backdrop-filter", "blur(6px)");
+
                 $("#foreground").fadeIn(NEXT_SLIDE_DELAY / 2);
+                $("#foreground #back").click(function(){
+                    $("#foreground").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        $("#foreground").html("");
+                    });
+                });
             });
         }
     </script>
