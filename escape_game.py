@@ -31,6 +31,16 @@ def lvl02():
     return flask.render_template("game_lvl02.html")
 
 
+@app.route("/game_lvl03")
+def lvl03():
+    return flask.render_template("game_lvl03.html")
+
+
+@app.route("/game_lvl04")
+def lvl04():
+    return flask.render_template("game_lvl04.html")
+
+
 @app.route("/game_lvl01/haiku", methods=['POST'])
 def lvl01_haiku():
     print(request.form["data"])

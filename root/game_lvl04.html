@@ -290,16 +290,12 @@
             $("#quiz02_2_2 button").css("margin", "32px");
             $("#quiz02_2_2 button").click(function(){
                 let value = $('input[name=selector]').filter(":checked").val();
-                if (value == 4){
-                    confirm("Congratulations, correct answer!");
-                    $("#content").hide();
-                    clearMess();
-                    stage6(true);
+                if (value == 4 && confirm("Congratulations, correct answer!")){
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        window.location.href = "{{ url_for('lvl04') }}"; 
+                    });
                 }else{
                     alert("Wrong answer!\n");
-                    $("#content").hide();
-                    clearMess();
-                    stage6(false);
                 }
             });
             $("#content").show();
@@ -351,162 +347,5 @@
                 });
             });
         }
-        function stage6(correct){
-            $("button").off('click');
-            if (correct){
-                $("#p_main").html(
-                    "\"Exactly! That is me, your number one choice for protecting "
-                    + "the Tree of Life. I fight all the rascals trying to harm the "
-                    + "Ygdrassil. You know, Fenrir, Surt, Hel, etc., the bad dudes. "
-                    + "Glad to hear, my reputation precedes me.\""
-                );
-            }else{
-                $("#p_main").html(
-                    "\"Pfft, no, iam Ratatoskr. Your number one choice for protecting "
-                    + "the Tree of Life. I fight all the rascals trying to harm the "
-                    + "Ygdrassil. You know, Fenrir, Surt, Hel, etc., the bad dudes.\""
-                );
-            }
-            $("#content").show();
-            $("#back").click(function(){
-                $("#content").hide();
-                stage5();
-            });
-            $("#enter button").on("click", function() {
-                $("#content").hide();
-                stage7();
-            });
-        }
-        function stage7(){
-            $("button").off('click');
-            $("#p_main").html(
-                "You tell him the whole story of how you got here and ask if he could "
-                + "somehow help you get out of this realm. He pauses to think. \"I can't "
-                + "get you home, but I can get you to Asgard. Once there, go search "
-                + "for Heimdall, he controls the Bifrost. Just make sure not to offend "
-                + "any of the gods and you will be fine. But first, I need a favor "
-                + "for you, could you please complete the translation of this stone "
-                + "tablet for me? My oversized squirrel brain is kind of lacking.\""
-            );
-            $("#content").show();
-            $("#back").click(function(){
-                $("#content").hide();
-                stage5();
-            });
-            $("#enter button").on("click", function() {
-                $("#content").hide();
-                stage8_quiz();
-            });
-        }
-        function stage8_quiz(){
-        $("button").off('click');
-        $("#p_main").html("" +
-            "<div id=\"quiz01\" style=\"display: none;\">" +
-                "<h2>Task:</h2>" +
-                "<p>Type in correct answer:</p>" +
-            "</div>" +
-            "<div id=\"quiz02\" style=\"display: none;\">" +
-                "<div id=\"quiz02_1\">" +
-                    "<h2>\"ᛏᚺᛖ ᚹᚫᛚᚾᚢᛏᛋ ᚫᚱᛖ ᚺᛁᛞᛞᛖᚾ ᛁᚾ ᚺᛖᛚᚺᛖᛁᛗ\"</h2>" +
-                "</div>" +
-                "<div id=\"quiz02_2\">" +
-                    "<div id=\"quiz02_2_1\">" +
-                        "The walnuts are hidden in:<br><textarea name=\"name\" id=\"quiz_input\" placeholder=\"Type correct solution here..\" cols=\"30\" rows=\"5\" style=\"" +
-                        "box-shadow: " +
-                            "rgba(255, 255, 255, .2) 0 0 12px 12px inset, " +
-                            "rgba(255, 255, 255, .2) 0 6px 6px, " +
-                            "rgba(255, 255, 255, .2) 6px 0 6px 0, " +
-                            "rgba(255, 255, 255, .2) 0 0 6px 6px;" +
-                        "padding: 10px; outline: none; resize: none; font-size: 20px;" +
-                        "\"></textarea>" +
-                    "</div>" +
-                "</div>" +
-            "</div>" +
-            "<div id=\"info\" class=\"small_button\">" +
-                "&#9432;" +
-            "</div>"
-        );
-        $("#content").css("padding", "40px 60px 40px 60px");
-        $("#enter").hide();
-        $("#info").css("bottom", "30px");
-        $("#info").css("right", "30px");
-        $("#info").css("position", "absolute");
-        $("#info").css("border", "none");
-        $("#info").css("display", "flex");
-        $("#info").css("align-items", "center");
-        $("#info").css("justify-content", "center");
-        $("#p_main").css("padding", "0");
-        $("#p_main").css("height", "100%");
-        $("#p_main").css("justify-content", "space-between");
-        $("#p_main").css("align-items", "start");
-        $("#content p p").css("margin", 0);
-
-        $("#quiz01 h2").css("margin", "0");
-        $("#quiz02").css("width", "100%");
-        $("#quiz02_2").css("display", "flex");
-        $("#quiz02_2").css("flex=direction", "row");
-        $("#quiz02_2").css("justify-content", "space-between");
-        $("#quiz02_2").css("width", "100%");
-        $("#quiz02_2_1").css("flex=direction", "column");
-        $("#quiz02_2_1").css("align-items", "flex-end");
-        $("#quiz02_2_1").css("text-align", "left");
-        $("#quiz_input").on("keypress", function(evt) {
-                if (evt.keyCode == 13 && !evt.shiftKey){
-                    if ($("#quiz_input").val().toLowerCase() == "helheim" && confirm("Congratulations, correct answer!")){
-                        $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                            window.location.href = "{{ url_for('lvl04') }}"; 
-                        });
-                    }else{
-                        alert("Wrong answer!\n");
-                    }
-                    return false;
-                }
-                return true;
-            });
-        $("#content").show();
-        $("#quiz01").show();
-        $("#quiz02").show();
-
-        $("#back").click(function(){
-            $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                $("#enter").show();
-                $("#p_main").css("height", "75%");
-                $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
-                $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                setTimeout(stage4, PICTURE_DELAY);
-            });
-        });
-        $("#info").click(function(){
-            $("#enter").hide();
-            $("#foreground").css("display", "flex");
-            $("#foreground").css("align-items", "center");
-            $("#foreground").css("justify-content", "center");
-            $("#foreground").html("" +
-                "<img src=\"{{ url_for('static', filename="data/question01_1.png") }}\" alt=\"\">" +
-                "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
-            );
-            $("#foreground img").css("height", "80%");
-            $("#foreground img").css("width", "80%");
-            $("#foreground img").css("padding", "10%");
-            $("#foreground img").css("background-color", "rgba(255, 255, 255, .1)");
-            $("#foreground img").css("backdrop-filter", "blur(6px)");
-
-            $("#foreground").fadeIn(NEXT_SLIDE_DELAY / 2);
-            $("#foreground #back").click(function(){
-                $("#foreground").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#foreground").html("");
-                });
-            });
-        });
-    }
-    function clearMess(){
-        $("#p_main").html("");
-        $("#content").css("padding", "0");
-        $("#p_main").css("height", "75%");
-        $("#p_main").css("justify-content", "center");
-        $("#p_main").css("align-items", "center");
-        $("#p_main").css("padding", "40px 60px 0 60px");
-        $("#enter").show();
-    }
     </script>
 </body>
