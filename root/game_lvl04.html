@@ -248,7 +248,126 @@
                     setTimeout(stage5, PICTURE_DELAY);
                 });
             });
+            $("#shop").click(function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("height", "75%");
+                    $("#enter").html("" +
+                        "<button></button>"
+                    );
+                    $("#enter button").css("margin", "0 auto");
+                    $("#enter button").css("height", "100%");
+                    $("#enter button").html("Submit");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture13_SHOP.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage_shop, PICTURE_DELAY);
+                });
+            });
+            $("#tavern").click(function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("height", "75%");
+                    $("#enter").html("" +
+                        "<button></button>"
+                    );
+                    $("#enter button").css("margin", "0 auto");
+                    $("#enter button").css("height", "100%");
+                    $("#enter button").html("Submit");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture14_TAVERN.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage_tavern, PICTURE_DELAY);
+                });
+            });
+            $("#castle").click(function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("height", "75%");
+                    $("#enter").html("" +
+                        "<button></button>"
+                    );
+                    $("#enter button").css("margin", "0 auto");
+                    $("#enter button").css("height", "100%");
+                    $("#enter button").html("Submit");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture12_GATE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage_castle, PICTURE_DELAY);
+                });
+            });
         }
+    /*---------side story---------*/
+    function stage_shop(){
+        $("button").off('click');
+            $("#p_main").html(
+                "As you get in, you notice, that there aren't any price tags. "+
+                "You ask the shopkeeper and he explains "+
+                "\"We all need to be ready for Ragnarok, to fight for "+
+                "Allfather! Everyone gets one weapon for free, there is "+
+                "always enough thanks to the skilled dwarven blacksmiths. "+
+                "I will be picking one suitable for you.\" "+
+                "You leave the shop with a small iron dagger since you couldn't even lift any of the other weapons."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+    }
+    function stage_tavern(){
+        $("button").off('click');
+            $("#p_main").html(
+                "As you enter, the yet muscular and dangerous looking,"+
+                " but easy-going and cheerful men inside quickly fill "+
+                "your mug and get you to drink with them. On the next day, "+
+                "you wake up back in the square with a strong headache."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+    }
+    function stage_castle(){
+        $("button").off('click');
+            $("#p_main").html(
+                "As you try to pass through the gate, "+
+                "the guards quickly shut the way with their "+
+                "spears. After extensive questioning they let you go. "+
+                "You are back at the square."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+    }
+    /*---------side story---------*/
         function stage5(){
             $("button").off('click');
             $("#content p").html(
