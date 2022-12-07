@@ -135,8 +135,7 @@
             });
         });
         function stage0(){
-            // setTimeout(stage1, PICTURE_DELAY);
-            stage5_quiz();
+            setTimeout(stage1, PICTURE_DELAY);
         }
         function stage1(){
             $("#enter button").off('click');
@@ -284,9 +283,12 @@
             $("#quiz02_2_2 button").css("margin", "32px");
             $("#quiz02_2_2 button").click(function(){
                 let value = $('input[name=selector]').filter(":checked").val();
-                console.log(value);
-                if (value == 3){
-                    alert("CORRECT!");
+                if (value == 1 && confirm("Congratulations, correct answer!")){
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        window.location.href = "{{ url_for('lvl03') }}"; 
+                    });
+                }else{
+                    alert("Wrong answer!\n");
                 }
             });
             $("#content").show();

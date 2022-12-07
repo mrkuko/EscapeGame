@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATTERN</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
+    <style>
+        @font-face {
+            font-family: Viking2;
+            src: url({{ url_for('static', filename="data/Oconnor-6RgM.ttf") }}) format('truetype');
+        }
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 4px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+        .small_button {
+            position: fixed;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid black;
+            z-index: 1;
+        }
+        .small_button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: 0.7s;
+        }
+        #background-main {
+            display: none;
+            background-size: 100% 100%;
+            background-color: #183343;
+            z-index: -1;
+        }
+        #content {
+            display: none;
+            position: absolute;
+            margin: 10% 10% 5% 5%;
+            font-family: Viking2;
+            font-size: 32px;
+            background-image: url({{ url_for('static', filename="data/old_paper.png") }});
+            background-size: 100% 100%;
+        }
+        #content #p_main {
+            position: static;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: justify;
+            height: 75%;
+            padding: 40px 60px 0 60px;
+            margin: 0;
+        }
+        #content #enter{
+            position: relative;
+            width: 100%;
+            height: 10%;
+            margin: 10px;
+            bottom: 0px;
+        }
+        #enter button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 100%;
+            width: 240px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+        }
+        #enter button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #quiz_button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 60px;
+            width: 180px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+        }
+        #quiz_button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #back{
+            top: 20px;
+            left: 20px;
+        }
+        #foreground {
+            display: none;
+            position: absolute;
+            background-color: rgba(30, 30, 30, 0.6);
+            background-size: 100% 100%;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="background-main" class="stretched-max"></div>
+    <div id="content" class="stretched-max">
+        <button id="back"><i class="arrow"></i></button>
+        <p></p>
+        <div id="enter">
+            <button></button>
+        </div>
+    </div>
+    <div id="foreground" class="stretched-max"></div>
+    <script src="{{ url_for('static', filename="scripts/core.js") }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture07.png") }})");
+            $("#enter button").html("Submit");
+            $("#background-main,#content").hide();
+            $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
+            $("#back").click(function(){
+                window.location.href = "{{ url_for('lvl02') }}"; 
+            });
+        });
+        function stage0(){
+            setTimeout(stage1, PICTURE_DELAY);
+        }
+        function stage1(){
+            $("#enter button").off('click');
+            $("#p_main").html(
+                "After the young Jotun makes you touch an obsidian stone "
+                + "with a blue glowing rune engraved in it, you faint. You "
+                + "slowly open your eyes feeling surprisingly rested. Above "
+                + "you span tall trees. As you slowly sit up, you see pristine "
+                + "forest nature all around you. As you wander around, suddenly "
+                + "a low-pitched voice rings above you."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#enter button").on("click", function() {
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture05.png") }})");
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                //     setTimeout(stage2, PICTURE_DELAY);
+                // });
+            });
+        }
+    </script>
+</body>
