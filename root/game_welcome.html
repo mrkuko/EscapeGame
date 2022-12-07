@@ -72,6 +72,7 @@
             font-family: Viking1;
         }
         #main h2{
+            display: none;
             text-align: center;
             margin: 0;
         }
@@ -93,6 +94,17 @@
         <script src={{ url_for('static', filename="scripts/l00.js") }}></script>
         <script>
             $(document).ready(function(){
+                $("h2").css("box-shadow", ""
+                    + "rgba(255, 255, 255, .2) 0 0 12px 12px inset, "
+                    + "rgba(255, 255, 255, .2) 0 6px 6px, "
+                    + "rgba(255, 255, 255, .2) 6px 0 6px 0, "
+                    + "rgba(255, 255, 255, .2) 0 0 6px 6px"
+                );
+                $("h2").css("padding", "10px");
+                $("h2").css("outline", "none");
+                $("h2").css("resize", "none");
+                $("h2").css("background-color", "rgba(255, 255, 255, 0.4)");
+                $("h2").fadeIn(600);
                 $("#enter button").click(function(){
                     $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                         window.location.href = "{{ url_for('lvl01') }}"; 
