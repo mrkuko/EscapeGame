@@ -19,6 +19,19 @@
             transform: rotate(135deg);
             -webkit-transform: rotate(135deg);
         }
+        .small_button {
+            position: fixed;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid black;
+            z-index: 1;
+        }
+        .small_button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: 0.7s;
+        }
         #background-main {
             display: none;
             background-size: 100% 100%;
@@ -69,23 +82,32 @@
             background-color: rgba(30, 30, 30, 0.9);
             transition: 0.7s;
         }
-        #content #back{
-            position: fixed;
-            border-radius: 50%;
+        #quiz_button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
             height: 40px;
-            width: 40px;
+            width: 120px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+        }
+        #quiz_button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #content #back{
             top: 20px;
             left: 20px;
-            background-color: rgba(255, 255, 255, 0.4);
-            border: 1px solid black;
-            z-index: 1;
-        }
-        #content #back:hover{
-            background-color: rgba(255, 255, 255, 0.8);
-            transition: 0.7s;
         }
         #foreground {
             display: none;
+            position: absolute;
+            background-color: rgba(30, 30, 30, 0.6);
+            background-size: 100% 100%;
             z-index: 1;
         }
     </style>
@@ -93,43 +115,8 @@
 <body>
     <div id="background-main" class="stretched-max"></div>
     <div id="content" class="stretched-max">
-        <button id="back"><i class="arrow"></i></button>
-        <p id="p_main">
-            <div id="quiz01" style="display: none;">
-                <h2>Task:</h2>
-                <p>Select correct answer for equation:</p>
-            </div>
-            <div id="quiz02" style="display: none;">
-                <div id="quiz02_1">
-                    <img src="url({{ url_for('static', filename="data/question.png") }}" alt="">
-                </div>
-                <div id="quiz02_2">
-                    <div id="quiz02_2_1">
-                        <h2>Your favorite thing in the world:</h2>
-                        <ul>
-                        <li>
-                            <input type="radio" id="f-option" name="selector">
-                            <label for="f-option">Pizza</label>
-                            <div class="check"></div>
-                        </li>
-                        <li>
-                            <input type="radio" id="s-option" name="selector">
-                            <label for="s-option">Bacon</label>
-                            <div class="check"><div class="inside"></div></div>
-                        </li>
-                        <li>
-                            <input type="radio" id="t-option" name="selector">
-                            <label for="t-option">Cats</label>
-                            <div class="check"><div class="inside"></div></div>
-                        </li>
-                        </ul>
-                    </div>
-                    <div id="quiz02_2_2">
-                        <button></button>
-                    </div>
-                </div>
-            </div>
-        </p>
+        <button id="back" class="small_button"><i class="arrow"></i></button>
+        <p id="p_main"></p>
         <div id="enter">
             <button></button>
         </div>
@@ -148,7 +135,8 @@
             });
         });
         function stage0(){
-            setTimeout(stage1, PICTURE_DELAY);
+            // setTimeout(stage1, PICTURE_DELAY);
+            stage5_quiz();
         }
         function stage1(){
             $("#enter button").off('click');
@@ -226,22 +214,77 @@
         }
         function stage5_quiz(){
             $("button").off('click');
-            // $("#content p").html(""
-            //     + "<div id=\"quiz01\">"
-            //     + "<h2>Task:</h2>"
-            //     + "<p>Select correct answer for equation:</p>"
-            //     + "</div><div id=\"quiz02\">"
-            //     + "<div id=\"quiz02_1\">"
-            //     + "<img src=\"url({{ url_for('static', filename="data/question.png") }}\" alt=\"\">"
-            //     + "</div><div id=\"quiz02_2\">"
-            //     + "</div></div>"
-            // );
-            // $("#content p p").css("padding", 0);
-            // $("#content p").css("justify-content", "space-between");
-            // $("#content p p").css("height", "auto");
-            // $("#quiz01 h2").css("margin", "0");
-            // $("#quiz01").css("align-items", "start");
-            // $("#quiz01").css("align-self", "start");
+            $("#p_main").html("" +
+                "<div id=\"quiz01\" style=\"display: none;\">" +
+                    "<h2>Task:</h2>" +
+                    "<p>Select correct answer for equation:</p>" +
+                "</div>" +
+                "<div id=\"quiz02\" style=\"display: none;\">" +
+                    "<div id=\"quiz02_1\">" +
+                        "<img src=\"{{ url_for('static', filename="data/question01.png") }}\" alt=\"\">" +
+                    "</div>" +
+                    "<div id=\"quiz02_2\">" +
+                        "<div id=\"quiz02_2_1\">" +
+                            "<ul>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"a-option\" name=\"selector\" value=\"1\">" +
+                                "<label for=\"a-option\">Pizza</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
+                                "<label for=\"b-option\">Bacon</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
+                                "<label for=\"c-option\">Cats</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
+                                "<label for=\"d-option\">Ananas</label>" +
+                            "</li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div id=\"quiz02_2_2\">" +
+                            "<button id=\"quiz_button\">Check</button>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+                "<div id=\"info\" class=\"small_button\">" +
+                    "&#9432;" +
+                "</div>"
+            );
+            $("#content").css("padding", "40px 60px 40px 60px");
+            $("#enter").hide();
+            $("#info").css("bottom", "30px");
+            $("#info").css("right", "30px");
+            $("#info").css("position", "absolute");
+            $("#info").css("border", "none");
+            $("#info").css("display", "flex");
+            $("#info").css("align-items", "center");
+            $("#info").css("justify-content", "center");
+            $("#p_main").css("padding", "0");
+            $("#p_main").css("height", "100%");
+            $("#p_main").css("justify-content", "space-between");
+            $("#p_main").css("align-items", "start");
+            $("#content p p").css("margin", 0);
+            $("#quiz02_1 img").css("height", "100px");
+
+            $("#quiz01 h2").css("margin", "0");
+            $("#quiz02_2").css("display", "flex");
+            $("#quiz02_2").css("flex=direction", "row");
+            $("#quiz02_2_1").css("flex=direction", "column");
+            $("#quiz02_2_1").css("align-items", "flex-end");
+            $("#quiz02_2_2").css("display", "flex");
+            $("#quiz02_2_2").css("flex=direction", "column");
+            $("#quiz02_2_2").css("align-items", "flex-end");
+            $("#quiz02_2_2 button").css("margin", "32px");
+            $("#quiz02_2_2 button").click(function(){
+                let value = $('input[name=selector]').filter(":checked").val();
+                console.log(value);
+                if (value == 3){
+                    alert("CORRECT!");
+                }
+            });
             $("#content").show();
             $("#quiz01").show();
             $("#quiz02").show();
@@ -254,6 +297,16 @@
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
                     setTimeout(stage4, PICTURE_DELAY);
                 });
+            });
+            $("#info").click(function(){
+                $("#foreground").css("display", "flex");
+                $("#foreground").css("align-items", "center");
+                $("#foreground").css("justify-content", "center");
+                $("#foreground").html("" +
+                    "<img src=\"{{ url_for('static', filename="data/question01.png") }}\" alt=\"\">"
+                );
+                // alert("TEST");
+                $("#foreground").fadeIn(NEXT_SLIDE_DELAY / 2);
             });
         }
     </script>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATTERN</title>
+    <link rel="stylesheet" href='../root/_main_style.css'>
+    <style>
+        @font-face {
+            font-family: Viking2;
+            src: url(../data/Thor-GlyO.ttf) format('truetype');
+        }
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 4px;
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+        #background-main {
+            display: none;
+            background-size: 100% 100%;
+            background-color: #183343;
+            z-index: -1;
+        }
+        #content {
+            display: none;
+            position: absolute;
+            margin: 10% 10% 5% 5%;
+            font-family: Viking2;
+            font-size: 32px;
+            background-image: url("../data/old_paper.png");
+            background-size: 100% 100%;
+        }
+        #content #p_main {
+            position: static;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: justify;
+            height: 75%;
+            padding: 40px 60px 0 60px;
+            margin: 0;
+        }
+        #content #enter{
+            position: relative;
+            width: 100%;
+            height: 10%;
+            margin: 10px;
+            bottom: 0px;
+        }
+        #enter button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 100%;
+            width: 240px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+        }
+        #quiz_button{
+            display: block;
+            background-color: rgba(30, 30, 30, 0.6) ;
+            border: solid rgba(30, 30, 30, 70);
+            margin: 0 auto;
+            height: 40px;
+            width: 120px;
+            font-family: Viking2;
+            font-size: x-large;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0px 0px 2px 2px rgb(0,0,0);
+        }
+        #quiz_button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #enter button:hover {
+            background-color: rgba(30, 30, 30, 0.9);
+            transition: 0.7s;
+        }
+        #content #back{
+            position: fixed;
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid black;
+            z-index: 1;
+        }
+        #content #back:hover{
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: 0.7s;
+        }
+        #foreground {
+            display: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="background-main" class="stretched-max"></div>
+    <div id="content" class="stretched-max">
+        <button id="back"><i class="arrow"></i></button>
+        <p id="p_main"></p>
+        <div id="enter">
+            <button></button>
+        </div>
+    </div>
+    <div id="foreground" class="stretched-max"></div>
+    <script src="../scripts/core.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#background-main").css("background-image", "data/capture04.png");
+            $("#enter button").html("Submit");
+            $("#p_main").html("" +
+                "<div id=\"quiz01\" style=\"display: none;\">" +
+                    "<h2>Task:</h2>" +
+                    "<p>Select correct answer for equation:</p>" +
+                "</div>" +
+                "<div id=\"quiz02\" style=\"display: none;\">" +
+                    "<div id=\"quiz02_1\">" +
+                        "<img src=\"../data/question.png\" alt=\"\">" +
+                    "</div>" +
+                    "<div id=\"quiz02_2\">" +
+                        "<div id=\"quiz02_2_1\">" +
+                            "<ul>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"a-option\" name=\"selector\" value=\"1\">" +
+                                "<label for=\"a-option\">Pizza</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
+                                "<label for=\"b-option\">Bacon</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
+                                "<label for=\"c-option\">Cats</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
+                                "<label for=\"d-option\">Ananas</label>" +
+                            "</li>" +
+                            "</ul>" +
+                            // "<form id=\"myForm\">" +
+                            //     "<fieldset>" +
+                            //         "<legend>Choose radioName</legend>" +
+                            //         "<label><input type=\"radio\" name=\"radioName\" value=\"1\" /> 1</label> <br />" +
+                            //         "<label><input type=\"radio\" name=\"radioName\" value=\"2\" /> 2</label> <br />" +
+                            //         "<label><input type=\"radio\" name=\"radioName\" value=\"3\" /> 3</label> <br />" +
+                            //     "</fieldset>" +
+                            // "</form>" +
+                        "</div>" +
+                        "<div id=\"quiz02_2_2\">" +
+                            "<button id=\"quiz_button\">Check</button>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>"
+            )
+            $("#background-main,#content").hide();
+            $("#background-main,#content").show();
+            
+            $("#content").css("padding", "40px 60px 40px 60px");
+            $("#enter").hide();
+            $("#p_main").css("padding", "0");
+            $("#p_main").css("height", "100%");
+            $("#p_main").css("justify-content", "space-between");
+            $("#p_main").css("align-items", "start");
+            $("#content p p").css("margin", 0);
+            $("#quiz02_1 img").css("height", "100px");
+
+            $("#quiz01 h2").css("margin", "0");
+            $("#quiz02_2").css("display", "flex");
+            $("#quiz02_2").css("flex=direction", "row");
+            $("#quiz02_2_1").css("flex=direction", "column");
+            $("#quiz02_2_1").css("align-items", "flex-end");
+            $("#quiz02_2_2").css("display", "flex");
+            $("#quiz02_2_2").css("flex=direction", "column");
+            $("#quiz02_2_2").css("align-items", "flex-end");
+            $("#quiz02_2_2 button").css("margin", "32px");
+            $("#quiz02_2_2 button").click(function(){
+                let value = $('input[name=selector]').filter(":checked").val();
+                console.log(value);
+                if (value == 3){
+                    alert("CORRECT!");
+                }
+            });
+
+            $("#quiz01").show();
+            $("#quiz02").show();
+        });
+    </script>
+</body>
