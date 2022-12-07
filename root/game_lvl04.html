@@ -126,12 +126,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture07.png") }})");
+            $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture10_FOREST_PORTAL.png") }})");
             $("#enter button").html("Submit");
             $("#background-main,#content").hide();
             $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
             $("#back").click(function(){
-                window.location.href = "{{ url_for('lvl02') }}"; 
+                window.location.href = "{{ url_for('lvl03') }}"; 
             });
         });
         function stage0(){
@@ -140,91 +140,146 @@
         function stage1(){
             $("#enter button").off('click');
             $("#p_main").html(
-                "After the young Jotun makes you touch an obsidian stone "
-                + "with a blue glowing rune engraved in it, you faint. You "
-                + "slowly open your eyes feeling surprisingly rested. Above "
-                + "you span tall trees. As you slowly sit up, you see pristine "
-                + "forest nature all around you. As you wander around, suddenly "
-                + "a low-pitched voice rings above you."
+                "Ratatoskr takes a pouch from his belt and pulls out 2 big seeds. "
+                + "You immediately sense a strong aura radiating from them. "
+                + "\"These are the seeds of Ygdrassil, very handy items. Now, "
+                + "watch! You probably won´t get to see this ever again.\""
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on("click", function() {
-                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
-                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, PICTURE_DELAY);
-                });
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                //     setTimeout(stage2, PICTURE_DELAY);
+                // });
+                $("#content").hide();
+                stage2();
             });
         }
         function stage2(){
             $("button").off('click');
             $("#p_main").html(
-                "As you wander around, suddenly a low-pitched voice rings above you. "
-                + "\"Would you look at him? What are you? Well... I`ll just see "
-                + "for myself!\" You look up and see an oversized squirrel in leather "
-                + "armor just as it falls on your back. He starts climbing all around "
-                + "your back. "
+                " He grabs the seeds and draws a big circle in the air. As he "
+                + "moves his arms in an arc, the air and even the space itself "
+                + "appears to be sliced through. As he finishes, a gaping portal "
+                + "stands before you. As you stand there awestruck, he shoves you "
+                + "in. You quickly turn around and from the closing portal, you "
+                + "see Ratatoskr giving you a thumbs up. \"You've got this!\" his voice echoes."
+            );
+            $("#content").show()
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture10_FOREST_PORTAL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage1, PICTURE_DELAY);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage3_city, PICTURE_DELAY);
+                });
+            });
+        }
+        function stage3_city(){
+            $("button").off('click');
+            $("#p_main").html(
+                "You are left standing in a majestic city where seemingly everything "
+                + "is made of crystals and gold. Above this square spans a huge "
+                + "palace taller than any building you have ever seen. As you look "
+                + "around, you notice the overwhelming abundance of weapon shops and taverns. "
+                + "From there you hear people having exuberant fun. "
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture07.png") }})");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture10_FOREST_PORTAL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
                     setTimeout(stage1, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
                 $("#content").hide();
-                stage3();
+                stage4_city();
             });
         }
-        function stage3(){
-            $("button").off('click');
+        function stage4_city(){
+            $("#enter button").off('click');
             $("#p_main").html(
-                "Unsuccessfully trying to shake him off, you fall on your "
-                + "stomach. \"Hmm, a notepad with scribbles about artifacts, magnifying "
-                + "glass and a flashlight... You must be some sort of a Historian! Right? "
-                + "Have u ever thought that your profession lacks action? Or Is that why "
-                + "are you here?\""
+                "At the nearby gate to the castle are 2 guards in shiny armor giving "
+                + "your frail body pitying looks. Glancing, in the opposite direction, "
+                + "you notice this land is a floating island and towards the horizon "
+                + "stretches a rainbow bridge."
             );
+            $("#p_main").css("height", "50%");
+            $("#enter").html("" +
+                "<div><h2>Pick up one route:</h2></div>" +
+                "<div>" +
+                    "<button id=\"shop\">Shop</button>" +
+                    "<button id=\"bridge\">Bridge</button>" +
+                "</div>" +
+                "<div>" +
+                    "<button id=\"tavern\">Tavern</button>" +
+                    "<button id=\"castle\">Castle</button>" +
+                "</div>"
+            );
+            $("#enter div").css("display", "flex");
+            $("#enter div").css("flex-direction", "row");
+            $("#enter div").css("justify-content", "center");
+            $("#enter h2").css("margin", "0");
+            $("#enter button").css("margin", "20px 40px");
+            $("#enter button").css("height", "60px");
             $("#content").show();
-            $("#enter button").on("click", function() {
+            $("#bridge").click(function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture08_RATATOSKR.png") }})");
+                    $("#p_main").css("height", "75%");
+                    $("#enter").html("" +
+                        "<button></button>"
+                    );
+                    $("#enter button").css("margin", "0 auto");
+                    $("#enter button").css("height", "100%");
+                    $("#enter button").html("Submit");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage4, PICTURE_DELAY);
+                    setTimeout(stage5, PICTURE_DELAY);
                 });
             });
         }
-        function stage4(){
+        function stage5(){
             $("button").off('click');
-            $("#p_main").html(
-                "\"Anyway... and now, my friend, tell me who am I?\" The squirrel jumps "
-                + "off you and gives you a look a puckish look."
+            $("#content p").html(
+                "You arrive at the bridge. At its origin stands a warrior with "
+                + "a horn in hand. \"Hello, traveler! I am Heimdall, I can see "
+                + "100 leagues, and can hear wool growing on sheep. With my sharp "
+                + "senses, I guard Bifrost. My eyes have been following you on your "
+                + "journey. I already know what you seek. But only those, who "
+                + "are worthy can step their foot on Bifrost. To prove yourself, "
+                + "answer my riddles about the prophecy of Ragnarok.\""
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage2, PICTURE_DELAY);
+                    setTimeout(stage3, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
                 $("#content").hide();
-                stage5_quiz();
+                stage6();
             });
         }
-        function stage5_quiz(){
-            $("button").off('click');
+        function stage6(){
+            $("#enter button").off('click');
             $("#p_main").html("" +
                 "<div id=\"quiz01\" style=\"display: none;\">" +
                     "<h2>Task:</h2>" +
-                    "<p>Select correct name before you upset the squirrel emperor:</p>" +
+                    "<p>Select correct character from prophecy:</p>" +
                 "</div>" +
                 "<div id=\"quiz02\" style=\"display: none;\">" +
                     "<div id=\"quiz02_1\">" +
-                        "<h2>What's my name?</h2>" +
+                        "<h2>Who will fight the serpent Jörmungandr?</h2>" +
                     "</div>" +
                     "<div id=\"quiz02_2\">" +
                         "<div id=\"quiz02_2_1\">" +
@@ -235,19 +290,19 @@
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
-                                "<label for=\"b-option\">Ratatouille</label>" +
+                                "<label for=\"b-option\">Fenrir</label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
-                                "<label for=\"c-option\">Egern</label>" +
+                                "<label for=\"c-option\">Thor</label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
-                                "<label for=\"d-option\">Ratatoskr</label>" +
+                                "<label for=\"d-option\">Freya</label>" +
                             "</li>" +
                             "<li>" +
                                 "<input type=\"radio\" id=\"e-option\" name=\"selector\" value=\"5\">" +
-                                "<label for=\"e-option\">SkrrShr</label>" +
+                                "<label for=\"e-option\">Loki</label>" +
                             "</li>" +
                             "</ul>" +
                         "</div>" +
@@ -290,9 +345,12 @@
             $("#quiz02_2_2 button").css("margin", "32px");
             $("#quiz02_2_2 button").click(function(){
                 let value = $('input[name=selector]').filter(":checked").val();
-                if (value == 4 && confirm("Congratulations, correct answer!")){
+                if (value == 3 && confirm("Congratulations, correct answer!")){
                     $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                        window.location.href = "{{ url_for('lvl04') }}"; 
+                        $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture16_THOR.png") }})");
+                        $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                        clearMess();
+                        setTimeout(stage7, PICTURE_DELAY);
                     });
                 }else{
                     alert("Wrong answer!\n");
@@ -301,6 +359,168 @@
             $("#content").show();
             $("#quiz01").show();
             $("#quiz02").show();
+
+            $("#info").click(function(){
+                $("#enter").hide();
+                $("#foreground").css("display", "flex");
+                $("#foreground").css("align-items", "center");
+                $("#foreground").css("justify-content", "center");
+                $("#foreground").html("" +
+                    "<img src=\"{{ url_for('static', filename="data/question02.png") }}\" alt=\"\">" +
+                    "<h1>Bro... just... Look at me...</h1>" +
+                    "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
+                );
+                $("#foreground img").css("height", "80%");
+                $("#foreground img").css("width", "80%");
+                $("#foreground img").css("padding", "10%");
+                $("#foreground img").css("background-color", "rgba(255, 255, 255, .1)");
+                $("#foreground img").css("backdrop-filter", "blur(6px)");
+
+                $("#foreground h1").css("display", "flex");
+                $("#foreground h1").css("align-items", "center");
+                $("#foreground h1").css("justify-content", "center");
+                
+
+                $("#foreground h1").css("position", "absolute");
+                $("#foreground h1").css("width", "100%");
+                $("#foreground h1").css("bottom", "0");
+                $("#foreground h1").css("display", "flex");
+                $("#foreground h1").css("align-items", "center");
+                $("#foreground h1").css("text-align", "center");
+
+                $("#foreground").fadeIn(NEXT_SLIDE_DELAY / 2);
+                $("#foreground #back").click(function(){
+                    $("#foreground").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        $("#foreground").html("");
+                    });
+                });
+            });
+        }
+        function stage7(){
+            $("button").off('click');
+            $("#p_main").css("text-align", "center");
+            $("#content").css("margin", "5%");
+            $("#p_main").html(
+                "-From old Norse scripts:<br>&nbsp;<br>" +
+                "Then Thor comes,<br>" +
+                "Earth’s son,<br>" +
+                "Odin’s son,<br>" +
+                "to fight the Midgard-serpent<br>" +
+                "the protector of Midgard<br>" +
+                "will kill that serpent in his rage.<br>" +
+                "But all humankind<br>" +
+                "will die out of the world<br>" +
+                "when Thor falls<br>" +
+                "after only nine steps,<br>" +
+                "struck down by the venom<br>" +
+                "of the honorless serpent."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
+                    $("#content").css("margin", "10% 10% 5% 5%");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage5, PICTURE_DELAY);
+                });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
+                    $("#content").css("margin", "10% 10% 5% 5%");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage8, PICTURE_DELAY);
+                });
+            });
+        }
+        function stage8(){
+            $("button").off('click');
+            $("#p_main").html("" +
+                "<div id=\"quiz01\" style=\"display: none;\">" +
+                    "<h2>Task:</h2>" +
+                    "<p>Select correct character from prophecy:</p>" +
+                "</div>" +
+                "<div id=\"quiz02\" style=\"display: none;\">" +
+                    "<div id=\"quiz02_1\">" +
+                        "<h2>Who will build a ship from nails and attack Asgard?</h2>" +
+                    "</div>" +
+                    "<div id=\"quiz02_2\">" +
+                        "<div id=\"quiz02_2_1\">" +
+                            "<ul>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"a-option\" name=\"selector\" value=\"1\">" +
+                                "<label for=\"a-option\">Fenrir</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
+                                "<label for=\"b-option\">Loki</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
+                                "<label for=\"c-option\">Odin</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
+                                "<label for=\"d-option\">Baldur</label>" +
+                            "</li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div id=\"quiz02_2_2\">" +
+                            "<button id=\"quiz_button\">Check</button>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+                "<div id=\"info\" class=\"small_button\">" +
+                    "&#9432;" +
+                "</div>"
+            );
+            $("#content").css("padding", "40px 60px 40px 60px");
+            $("#enter").hide();
+            $("#info").css("bottom", "30px");
+            $("#info").css("right", "30px");
+            $("#info").css("position", "absolute");
+            $("#info").css("border", "none");
+            $("#info").css("display", "flex");
+            $("#info").css("align-items", "center");
+            $("#info").css("justify-content", "center");
+            $("#p_main").css("padding", "0");
+            $("#p_main").css("height", "100%");
+            $("#p_main").css("justify-content", "space-between");
+            $("#p_main").css("align-items", "start");
+            $("#content p p").css("margin", 0);
+
+            $("#quiz01 h2").css("margin", "0");
+            $("#quiz02").css("width", "100%");
+            $("#quiz02_2").css("display", "flex");
+            $("#quiz02_2").css("flex=direction", "row");
+            $("#quiz02_2").css("justify-content", "space-between");
+            $("#quiz02_2").css("width", "100%");
+            $("#quiz02_2_1").css("flex=direction", "column");
+            $("#quiz02_2_1").css("align-items", "flex-end");
+            $("#quiz02_2_1 img").css("height", "42px");
+            $("#quiz02_2_2").css("display", "flex");
+            $("#quiz02_2_2").css("flex=direction", "column");
+            $("#quiz02_2_2").css("align-items", "flex-end");
+            $("#quiz02_2_2 button").css("margin", "32px");
+            $("#quiz02_2_2 button").click(function(){
+                let value = $('input[name=selector]').filter(":checked").val();
+                if (value == 2){
+                    confirm("Congratulations, correct answer!");
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        clearMess();
+                        $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture17_LOKI.png") }})");
+                        $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                        setTimeout(stage9, PICTURE_DELAY);
+                    });
+                }else{
+                    alert("Wrong answer!\n");
+                }
+            });
+            $("#quiz01").show();
+            $("#quiz02").show();
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
 
             $("#back").click(function(){
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
@@ -346,6 +566,37 @@
                     });
                 });
             });
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+        }
+        function stage9(){
+            $("button").off('click');
+            $("#p_main").html(
+                "-From old Norse scripts:<br>&nbsp;<br>" +
+                "A ship journeys from the east, Muspell's people are coming,<br>" +
+                "over the waves, and Loki steers<br>" +
+                "There are the monstrous brood with all the raveners,<br>" +
+                "The brother of Byleist is in company with them."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage10, PICTURE_DELAY);
+                });
+            });
+        }
+        function stage10(){
+            
+        }
+        function clearMess(){
+            $("#p_main").html("");
+            $("#content").css("padding", "0");
+            $("#p_main").css("height", "75%");
+            $("#p_main").css("justify-content", "center");
+            $("#p_main").css("align-items", "center");
+            $("#p_main").css("padding", "40px 60px 0 60px");
+            $("#enter").show();
         }
     </script>
 </body>
