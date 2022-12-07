@@ -11,6 +11,9 @@
             font-family: Viking2;
             src: url({{ url_for('static', filename="data/Oconnor-6RgM.ttf") }}) format('truetype');
         }
+        h2 {
+            text-align: left;
+        }
         .arrow {
             border: solid black;
             border-width: 0 3px 3px 0;
@@ -262,7 +265,7 @@
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture11_SQUARE.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage3, PICTURE_DELAY);
+                    setTimeout(stage3_city, PICTURE_DELAY);
                 });
             });
             $("#enter button").on("click", function() {
@@ -271,7 +274,7 @@
             });
         }
         function stage6(){
-            $("#enter button").off('click');
+            $("button").off('click');
             $("#p_main").html("" +
                 "<div id=\"quiz01\" style=\"display: none;\">" +
                     "<h2>Task:</h2>" +
@@ -359,6 +362,11 @@
             $("#content").show();
             $("#quiz01").show();
             $("#quiz02").show();
+            $("#back").click(function(){
+                $("#content").hide();
+                clearMess();
+                stage3_city();
+            });
 
             $("#info").click(function(){
                 $("#enter").hide();
@@ -431,7 +439,7 @@
                     $("#content").css("margin", "10% 10% 5% 5%");
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage8, PICTURE_DELAY);
+                    stage8();
                 });
             });
         }
@@ -570,6 +578,7 @@
         }
         function stage9(){
             $("button").off('click');
+            $("#p_main").css("text-align", "center");
             $("#p_main").html(
                 "-From old Norse scripts:<br>&nbsp;<br>" +
                 "A ship journeys from the east, Muspell's people are coming,<br>" +
@@ -580,14 +589,218 @@
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
             $("#enter button").on("click", function() {
                 $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#p_main").css("text-align", "justify");
                     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
                     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                    setTimeout(stage10, PICTURE_DELAY);
+                    stage10();
                 });
             });
         }
         function stage10(){
-            
+            $("button").off('click');
+            $("#p_main").html("" +
+                "<div id=\"quiz01\" style=\"display: none;\">" +
+                    "<h2>Task:</h2>" +
+                    "<p>Select correct character from prophecy:</p>" +
+                "</div>" +
+                "<div id=\"quiz02\" style=\"display: none;\">" +
+                    "<div id=\"quiz02_1\">" +
+                        "<h2>Who will fight the wolf Fenrir?</h2>" +
+                    "</div>" +
+                    "<div id=\"quiz02_2\">" +
+                        "<div id=\"quiz02_2_1\">" +
+                            "<ul>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"a-option\" name=\"selector\" value=\"1\">" +
+                                "<label for=\"a-option\">Surtor</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"b-option\" name=\"selector\" value=\"2\">" +
+                                "<label for=\"b-option\">Skoll</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"c-option\" name=\"selector\" value=\"3\">" +
+                                "<label for=\"c-option\">Mimir</label>" +
+                            "</li>" +
+                            "<li>" +
+                                "<input type=\"radio\" id=\"d-option\" name=\"selector\" value=\"4\">" +
+                                "<label for=\"d-option\">Odin</label>" +
+                            "</li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div id=\"quiz02_2_2\">" +
+                            "<button id=\"quiz_button\">Check</button>" +
+                        "</div>" +
+                    "</div>" +
+                "</div>" +
+                "<div id=\"info\" class=\"small_button\">" +
+                    "&#9432;" +
+                "</div>"
+            );
+            $("#content").css("padding", "40px 60px 40px 60px");
+            $("#enter").hide();
+            $("#info").css("bottom", "30px");
+            $("#info").css("right", "30px");
+            $("#info").css("position", "absolute");
+            $("#info").css("border", "none");
+            $("#info").css("display", "flex");
+            $("#info").css("align-items", "center");
+            $("#info").css("justify-content", "center");
+            $("#p_main").css("padding", "0");
+            $("#p_main").css("height", "100%");
+            $("#p_main").css("justify-content", "space-between");
+            $("#p_main").css("align-items", "start");
+            $("#content p p").css("margin", 0);
+
+            $("#quiz01 h2").css("margin", "0");
+            $("#quiz02").css("width", "100%");
+            $("#quiz02_2").css("display", "flex");
+            $("#quiz02_2").css("flex=direction", "row");
+            $("#quiz02_2").css("justify-content", "space-between");
+            $("#quiz02_2").css("width", "100%");
+            $("#quiz02_2_1").css("flex=direction", "column");
+            $("#quiz02_2_1").css("align-items", "flex-end");
+            $("#quiz02_2_1 img").css("height", "42px");
+            $("#quiz02_2_2").css("display", "flex");
+            $("#quiz02_2_2").css("flex=direction", "column");
+            $("#quiz02_2_2").css("align-items", "flex-end");
+            $("#quiz02_2_2 button").css("margin", "32px");
+            $("#quiz02_2_2 button").click(function(){
+                let value = $('input[name=selector]').filter(":checked").val();
+                if (value == 4){
+                    confirm("Congratulations, correct answer!");
+                    $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        clearMess();
+                        $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture18_ODIN.png") }})");
+                        $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                        stage11();
+                    });
+                }else{
+                    alert("Wrong answer!\n");
+                }
+            });
+            $("#quiz01").show();
+            $("#quiz02").show();
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#enter").show();
+                    $("#p_main").css("height", "75%");
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture06.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage4, PICTURE_DELAY);
+                });
+            });
+            $("#info").click(function(){
+                $("#enter").hide();
+                $("#foreground").css("display", "flex");
+                $("#foreground").css("align-items", "center");
+                $("#foreground").css("justify-content", "center");
+                $("#foreground").html("" +
+                    "<img src=\"{{ url_for('static', filename="data/question02.png") }}\" alt=\"\">" +
+                    "<h1>Bro... just... Look at me...</h1>" +
+                    "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
+                );
+                $("#foreground img").css("height", "80%");
+                $("#foreground img").css("width", "80%");
+                $("#foreground img").css("padding", "10%");
+                $("#foreground img").css("background-color", "rgba(255, 255, 255, .1)");
+                $("#foreground img").css("backdrop-filter", "blur(6px)");
+
+                $("#foreground h1").css("display", "flex");
+                $("#foreground h1").css("align-items", "center");
+                $("#foreground h1").css("justify-content", "center");
+                
+
+                $("#foreground h1").css("position", "absolute");
+                $("#foreground h1").css("width", "100%");
+                $("#foreground h1").css("bottom", "0");
+                $("#foreground h1").css("display", "flex");
+                $("#foreground h1").css("align-items", "center");
+                $("#foreground h1").css("text-align", "center");
+
+                $("#foreground").fadeIn(NEXT_SLIDE_DELAY / 2);
+                $("#foreground #back").click(function(){
+                    $("#foreground").fadeOut(NEXT_SLIDE_DELAY, function(){
+                        $("#foreground").html("");
+                    });
+                });
+            });
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+        }
+        function stage11(){
+            $("button").off('click');
+            $("#p_main").html(
+                "-From old Norse scripts:<br>&nbsp;<br>" +
+                "-From old Norse scripts:<br>" +
+                "Then is fulfilled Hlín's<br>" +
+                "second sorrow,<br>" +
+                "when Óðinn goes<br>" +
+                "to fight with the wolf,<br>" +
+                "and Beli's slayer,<br>" +
+                "bright, against Surtr.<br>" +
+                "Then shall Frigg's<br>" +
+                "sweet friend fall."
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                //     setTimeout(stage2, PICTURE_DELAY);
+                // });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture15_HEIMDALL.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage12, PICTURE_DELAY);
+                });
+            });
+        }
+        function stage12(){
+            $("button").off('click');
+            $("#p_main").html(
+                "\"You truly are wise. You may now go home.\""
+            );
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                //     setTimeout(stage2, PICTURE_DELAY);
+                // });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture19_BEDROOM.png") }})");
+                    $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                    setTimeout(stage13, PICTURE_DELAY);
+                });
+            });
+        }
+        function stage13(){
+            $("button").off('click');
+            $("#p_main").html(
+                "A wave of relief goes through your body and as you step on the bridge, "
+                + "everything around you fades and you appear in your bedroom. "
+                + "The fatigue overwhelms you and you pass out falling right into bed."
+            );
+            $("#enter button").html("Let's go one more time!")
+            $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
+                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
+                //     setTimeout(stage2, PICTURE_DELAY);
+                // });
+            });
+            $("#enter button").on("click", function() {
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    window.location.href = "{{ url_for('lvl00') }}";
+                });
+            });
         }
         function clearMess(){
             $("#p_main").html("");
