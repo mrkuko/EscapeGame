@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATTERN</title>
+    <title>The Game</title>
     <link rel="stylesheet" href={{ url_for('static', filename='root/_main_style.css') }}>
     <style>
         @font-face {
@@ -134,14 +134,16 @@
             $("#background-main,#content").hide();
             $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2, stage0);
             $("#back").click(function(){
-                window.location.href = "{{ url_for('lvl03') }}"; 
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    window.location.href = "{{ url_for('lvl03') }}";
+                });
             });
         });
         function stage0(){
             setTimeout(stage1, PICTURE_DELAY);
         }
         function stage1(){
-            $("#enter button").off('click');
+            $("button").off('click');
             $("#p_main").html(
                 "Ratatoskr takes a pouch from his belt and pulls out 2 big seeds. "
                 + "You immediately sense a strong aura radiating from them. "
@@ -149,12 +151,12 @@
                 + "watch! You probably won´t get to see this ever again.\""
             );
             $("#content").fadeIn(NEXT_SLIDE_DELAY);
+            $("#back").click(function(){
+                $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
+                    window.location.href = "{{ url_for('lvl03') }}";
+                });
+            });
             $("#enter button").on("click", function() {
-                // $("#background-main,#content").fadeOut(NEXT_SLIDE_DELAY, function(){
-                //     $("#background-main").css("background-image", "url({{ url_for('static', filename="data/capture09_ITEMS.png") }})");
-                //     $("#background-main").fadeIn(NEXT_SLIDE_DELAY / 2);
-                //     setTimeout(stage2, PICTURE_DELAY);
-                // });
                 $("#content").hide();
                 stage2();
             });
@@ -374,8 +376,7 @@
                 $("#foreground").css("align-items", "center");
                 $("#foreground").css("justify-content", "center");
                 $("#foreground").html("" +
-                    "<img src=\"{{ url_for('static', filename="data/question02.png") }}\" alt=\"\">" +
-                    "<h1>Bro... just... Look at me...</h1>" +
+                    "<img src=\"{{ url_for('static', filename="data/hint1.png") }}\" alt=\"\">" +
                     "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
                 );
                 $("#foreground img").css("height", "80%");
@@ -544,8 +545,7 @@
                 $("#foreground").css("align-items", "center");
                 $("#foreground").css("justify-content", "center");
                 $("#foreground").html("" +
-                    "<img src=\"{{ url_for('static', filename="data/question02.png") }}\" alt=\"\">" +
-                    "<h1>Bro... just... Look at me...</h1>" +
+                    "<img src=\"{{ url_for('static', filename="data/hint2.png") }}\" alt=\"\">" +
                     "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
                 );
                 $("#foreground img").css("height", "80%");
@@ -704,8 +704,7 @@
                 $("#foreground").css("align-items", "center");
                 $("#foreground").css("justify-content", "center");
                 $("#foreground").html("" +
-                    "<img src=\"{{ url_for('static', filename="data/question02.png") }}\" alt=\"\">" +
-                    "<h1>Bro... just... Look at me...</h1>" +
+                    "<img src=\"{{ url_for('static', filename="data/hint3.png") }}\" alt=\"\">" +
                     "<button id=\"back\" class=\"small_button\"><i class=\"arrow\"></i></button>"
                 );
                 $("#foreground img").css("height", "80%");
